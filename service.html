@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>昆廣數位與網通技術工作室｜一頁式官網製作 × 遠端排障 × Cisco 網路架構</title>
+<style>
+  :root { --bg: #070b14; --surface: #0f172a; --card: #131c31; --border: #23314d; --cyan: #38bdf8; --emerald: #10b981; --gold: #f59e0b; --text: #f8fafc; --muted: #94a3b8; }
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', 'Microsoft JhengHei', sans-serif; }
+  body { background: var(--bg); color: var(--text); line-height: 1.65; overflow-x: hidden; }
+  a { text-decoration: none; }
+  header { background: rgba(15, 23, 42, 0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 15px 6%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
+  .logo { font-size: 1.2rem; font-weight: 800; color: var(--cyan); }
+  .logo span { color: var(--emerald); }
+  .nav-group { display: flex; gap: 10px; flex-wrap: wrap; }
+  .btn-nav { padding: 8px 16px; border-radius: 8px; font-weight: 700; font-size: 0.88rem; cursor: pointer; border: none; transition: 0.25s; }
+  .btn-cta { background: var(--emerald); color: #052e16; box-shadow: 0 0 15px rgba(16,185,129,0.4); }
+  .btn-cta:hover { transform: translateY(-2px); box-shadow: 0 0 22px rgba(16,185,129,0.75); }
+  .btn-lab-link { background: rgba(56,189,248,0.12); color: var(--cyan); border: 1px solid var(--cyan); }
+  .btn-lab-link:hover { background: var(--cyan); color: #0f172a; }
+
+  @keyframes heroPop { 0% { opacity: 0; transform: translateY(38px) scale(0.96); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
+  @keyframes goldPulse { 0%, 100% { box-shadow: 0 0 8px rgba(245,158,11,0.3); } 50% { box-shadow: 0 0 22px rgba(245,158,11,0.75); } }
+
+  .hero { padding: 65px 6% 55px; text-align: center; background: radial-gradient(circle at top, #064e3b 0%, #172554 40%, var(--bg) 80%); border-bottom: 1px solid var(--border); }
+  .hero-tag { display: inline-block; background: rgba(16,185,129,0.15); border: 1px solid var(--emerald); color: #6ee7b7; padding: 6px 16px; border-radius: 99px; font-size: 0.85rem; font-weight: 700; margin-bottom: 16px; animation: heroPop 0.7s ease both; }
+  .hero h1 { font-size: 2.3rem; font-weight: 900; margin-bottom: 14px; color: #fff; animation: heroPop 0.8s ease 0.15s both; }
+  .hero p { color: var(--muted); max-width: 780px; margin: 0 auto 24px; font-size: 1.05rem; animation: heroPop 0.85s ease 0.28s both; }
+  .badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+  .badge { background: var(--card); color: #e2e8f0; padding: 8px 16px; border-radius: 99px; font-size: 0.88rem; font-weight: 700; border: 1px solid var(--border); animation: heroPop 0.75s ease 0.4s both; }
+  .badge.vip { border-color: var(--gold); color: #fde68a; background: rgba(245,158,11,0.15); animation: heroPop 0.75s ease 0.4s both, goldPulse 2.8s infinite ease-in-out; }
+
+  .container { max-width: 1180px; margin: 50px auto; padding: 0 6%; }
+  .sec-title { font-size: 1.5rem; font-weight: 800; margin-bottom: 8px; border-left: 4px solid var(--emerald); padding-left: 14px; color: #fff; }
+  .sec-desc { color: var(--muted); font-size: 0.95rem; margin-bottom: 28px; padding-left: 18px; }
+
+  .srv-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 26px; margin-bottom: 60px; }
+  .srv-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 30px; display: flex; flex-direction: column; justify-content: space-between; transition: 0.3s; }
+  .srv-card:hover { transform: translateY(-6px); border-color: var(--emerald); box-shadow: 0 14px 30px rgba(16,185,129,0.16); }
+  .srv-card h3 { font-size: 1.3rem; color: #fff; margin-bottom: 8px; }
+  .price { font-size: 1.65rem; font-weight: 900; color: var(--gold); margin-bottom: 16px; }
+  .price small { font-size: 0.85rem; color: var(--muted); font-weight: 400; }
+  .srv-list { list-style: none; margin-bottom: 24px; }
+  .srv-list li { padding: 6px 0; color: #cbd5e1; font-size: 0.94rem; }
+  .srv-list li::before { content: "✔ "; color: var(--emerald); font-weight: bold; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 26px; margin-bottom: 55px; }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; transition: 0.3s; }
+  .card:hover { transform: translateY(-6px); border-color: var(--cyan); box-shadow: 0 12px 28px rgba(56,189,248,0.2); }
+  .thumb-wrap { width: 100%; height: 195px; background: #fff; display: flex; align-items: center; justify-content: center; overflow: hidden; cursor: zoom-in; position: relative; }
+  .thumb-wrap img { width: 100%; height: 100%; object-fit: contain; padding: 8px; }
+  .zoom-hint { position: absolute; bottom: 8px; right: 8px; background: rgba(15,23,42,0.88); color: #38bdf8; font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 6px; }
+  .card-body { padding: 22px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+  .card h3 { color: var(--cyan); font-size: 1.12rem; font-weight: 800; margin-bottom: 10px; }
+  .card p { color: #cbd5e1; font-size: 0.92rem; margin-bottom: 14px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+  .tag { background: var(--bg); color: var(--muted); font-size: 0.78rem; padding: 3px 9px; border-radius: 5px; border: 1px solid var(--border); }
+  .actions { display: flex; gap: 10px; }
+  .btn-act { flex: 1; text-align: center; padding: 9px; border-radius: 8px; font-size: 0.86rem; font-weight: 700; cursor: pointer; border: none; }
+  .btn-img { background: #2563eb; color: #fff; }
+  .btn-pkt { background: #1e293b; color: #e2e8f0; border: 1px solid #334155; }
+
+  .contact-box { background: linear-gradient(135deg, #064e3b, #0f172a); border: 1px solid var(--emerald); border-radius: 16px; padding: 40px; text-align: center; margin-bottom: 45px; }
+  .c-pills { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-top: 20px; }
+  .c-pill { background: rgba(0,0,0,0.45); border: 1px solid var(--emerald); color: #fff; padding: 12px 24px; border-radius: 10px; font-weight: 700; }
+  footer { text-align: center; padding: 26px; border-top: 1px solid var(--border); color: #64748b; font-size: 0.85rem; }
+  .modal { display: none; position: fixed; inset: 0; background: rgba(3,7,18,0.9); z-index: 999; align-items: center; justify-content: center; padding: 20px; }
+  .modal.open { display: flex; }
+  .modal-box { background: var(--surface); border: 1px solid var(--cyan); border-radius: 14px; max-width: 960px; width: 100%; padding: 22px; text-align: center; position: relative; }
+  .modal-box img { max-width: 100%; max-height: 74vh; border-radius: 8px; background: #fff; margin-bottom: 16px; }
+  .btn-close { position: absolute; top: 14px; right: 16px; background: #ef4444; color: #fff; border: none; padding: 6px 14px; border-radius: 6px; font-weight: 700; cursor: pointer; }
+  .reveal { opacity: 0; transform: translateY(65px) scale(0.95); transition: opacity 0.85s ease-out, transform 0.85s cubic-bezier(0.16,1,0.3,1); }
+  .reveal.show { opacity: 1; transform: translateY(0) scale(1); }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">⚡ 昆廣<span>數位與網通</span>技術工作室</div>
+  <div class="nav-group">
+    <a href="#projects" class="btn-nav btn-lab-link">📂 網管拓撲與 .pkt 展示庫</a>
+    <a href="#contact" class="btn-nav btn-cta">💬 免費諮詢報價</a>
+  </div>
+</header>
+<section class="hero">
+  <div class="hero-tag">100% 全台灣線上遠端服務 ｜ 免出門、免車馬費、透明報價</div>
+  <h1>高質感一頁式官網製作 × 遠端電腦與 Cisco 網路排障</h1>
+  <p>兼具國家級強弱電證照與企業網管實戰背景，協助個人品牌與店家打造「永久免主機年費」形象官網，並提供 AnyDesk 遠端電腦除錯、路由器調校與 Packet Tracer 專案支援。</p>
+  <div class="badges">
+    <span class="badge vip">🏅 國家丙級室內配線技術士</span>
+    <span class="badge vip">🚚 普通大貨車駕照</span>
+    <span class="badge">🌐 一頁式響應式官網（免主機年費）</span>
+    <span class="badge">🛠️ AnyDesk 遠端電腦／網路除錯</span>
+    <span class="badge">🐧 Cisco / Rocky Linux 9 技術支援</span>
+  </div>
+</section><div class="container">
+    <div id="showcase" class="reveal" style="margin-bottom: 60px;">
+    <h2 class="sec-title" style="border-color: var(--gold);">🌟 商業網站精選作品展示（實機錄影 ＋ 線上體驗）</h2>
+    <p class="sec-desc">實際為門市打造的響應式一頁式形象官網，包含 75 款全螢幕燈箱相簿、平滑滾動動畫與手機一鍵預約導航</p>
+    <div style="background: linear-gradient(135deg, #131c31 0%, #0f172a 100%); border: 1px solid var(--gold); border-radius: 16px; padding: 28px; display: flex; flex-wrap: wrap; align-items: center; gap: 28px; box-shadow: 0 12px 32px rgba(245,158,11,0.15);">
+      <a href="https://www.youtube.com/watch?v=4UXxec2_JYQ&feature=youtu.be" target="_blank" style="flex: 1; min-width: 280px; max-width: 440px; position: relative; border-radius: 12px; overflow: hidden; border: 1px solid #334155; display: block;">
+        <img src="https://youtube.com" alt="精品門市一頁式形象官網設計展示" style="width: 100%; display: block; transition: transform 0.35s ease;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+        <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.35); display: flex; align-items: center; justify-content: center;">
+          <span style="background: #ef4444; color: #fff; padding: 10px 20px; border-radius: 99px; font-weight: 800; font-size: 0.95rem; box-shadow: 0 4px 15px rgba(239,68,68,0.6);">▶ 點擊觀看 YouTube 實機展示</span>
+        </div>
+      </a>
+      <div style="flex: 1.3; min-width: 280px;">
+        <div style="display: inline-block; background: rgba(245,158,11,0.15); color: #fde68a; border: 1px solid var(--gold); font-size: 0.8rem; font-weight: 700; padding: 4px 12px; border-radius: 99px; margin-bottom: 10px;">商業官網代表作 ｜ 方案 B ($3,500) 實績</div>
+        <h3 style="font-size: 1.45rem; font-weight: 800; color: #fff; margin-bottom: 10px;">👓 築目眼鏡 Jhumu Optical｜國家合格驗光所形象官網</h3>
+        <p style="color: #cbd5e1; font-size: 0.95rem; margin-bottom: 16px;">採用深色精品工藝視覺設計，整合 <strong>75 款職人手工眼鏡全螢幕相簿燈箱</strong>（支援鍵盤與按鈕連續翻閱）、國家認證驗光師介紹、門市營業時間與 Google 地圖一鍵導航，並託管於零主機年費的 HTTPS 雲端平台。</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+          <a href="https://www.youtube.com/watch?v=4UXxec2_JYQ&feature=youtu.be" target="_blank" class="btn-nav" style="background: #ef4444; color: #fff; padding: 11px 20px;">▶ 觀看 YouTube 展示影片</a>
+          <a href="https://jhumu032805587.github.io/" target="_blank" class="btn-nav" style="background: var(--gold); color: #1f2937; padding: 11px 20px;">🌐 親自打開展示網站 ↗</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h2 class="sec-title reveal">💼 遠端技術接案服務與透明價目</h2>
+  <p class="sec-desc reveal">一次買斷無隱藏年費，遠端排障修好確認正常後再付款</p>
+  <div class="srv-grid reveal">
+    <div class="srv-card">
+      <div>
+        <h3>🌐 一頁式形象官網 / 作品集製作</h3>
+        <div class="price">$2,500 ～ $3,500 <small>/ 一次買斷（免主機年費）</small></div>
+        <ul class="srv-list">
+          <li>手機、平板、電腦全尺寸完美自適應（RWD）</li>
+          <li>內建滑動浮現動態特效、作品相簿燈箱與地圖導航</li>
+          <li>免費雲端託管＋HTTPS 加密鎖頭（省下每年數千元主機費）</li>
+          <li>商業實績參考：<a href="https://jhumu032805587.github.io/" target="_blank" style="color:#38bdf8;text-decoration:underline;">築目眼鏡官網</a> ｜ <a href="https://youtube.com" target="_blank" style="color:#f59e0b;text-decoration:underline;">YouTube 實機展示</a></li>
+        </ul>
+      </div>
+      <a href="#contact" class="btn-nav btn-cta" style="text-align:center;padding:12px;">預約網頁製作諮詢</a>
+    </div>
+    <div class="srv-card">
+      <div>
+        <h3>🛠️ AnyDesk 遠端電腦除錯 ＆ 網路調校</h3>
+        <div class="price">$600 ～ $1,200 <small>/ 次（修好再付費）</small></div>
+        <ul class="srv-list">
+          <li>Windows 開機卡頓優化、惡意廣告與流氓軟體清理</li>
+          <li>印表機連線異常、辦公室區域網路芳鄰分享排障</li>
+          <li>家用／小型企業路由器設定（Port Forwarding、VPN）</li>
+          <li>Cisco Packet Tracer 網路拓撲設計與作業除錯指導</li>
+          <li><strong>安心承諾：先處理確認正常後再匯款，未解決不收費</strong></li>
+        </ul>
+      </div>
+      <a href="#contact" class="btn-nav btn-gh" style="text-align:center;padding:12px;">立即預約遠端排障</a>
+    </div>
+  </div>
+
+  <div id="projects">
+    <h2 class="sec-title reveal" style="border-color:var(--cyan);">📂 網路架構與系統實戰展示庫（可線上放大看圖與下載 .pkt）</h2>
+    <p class="sec-desc reveal">點擊拓撲縮圖可開啟高畫質大圖燈箱，或直接下載 Cisco Packet Tracer (.pkt) 原始專案檔檢視</p>
+    <div class="grid" id="projectGrid"></div>
+  </div>
+
+  <div id="contact" class="contact-box reveal">
+    <h2 style="font-size:1.65rem;margin-bottom:10px;">立即聯繫討論您的網站或電腦網路需求</h2>
+    <p style="color:#a7f3d0;">歡迎直接來電或加 LINE 傳送需求，免費為您評估與報價！</p>
+    <div class="c-pills">
+      <a href="tel:0973885121" class="c-pill">📞 電話 / LINE ID：0973-885-121</a>
+      <div class="c-pill">📍 高雄市鳳山區 ｜ 全台灣線上遠端交付</div>
+    </div>
+  </div>
+</div>
+<footer>© 2026 昆廣數位與網通技術工作室 (Nick Lin) ｜ <a href="index.html" style="color:#38bdf8;">切換至個人工程師履歷版</a></footer>
+<div class="modal" id="lightbox" onclick="if(event.target===this) closeModal()">
+  <div class="modal-box">
+    <button class="btn-close" onclick="closeModal()">✕ 關閉</button>
+    <div style="font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:14px;" id="lbTitle">拓撲圖預覽</div>
+    <img id="lbImg" src="" alt="網路拓撲圖">
+    <div><a id="lbPkt" href="#" download class="btn-act btn-cta" style="display:inline-block;padding:10px 24px;">📥 下載此專案的 .pkt 原始檔</a></div>
+  </div>
+</div>
+<script>
+  const labs = [
+    { title: "1. 跨國總部與分公司 Site-to-Site VPN 架構", desc: "模擬台北與高雄分公司透過 ISP 公網（ISR4331）建立安全邊界，完成公私網介面隔離、不重疊網段規劃與加密通道演練。", tags: ["Cisco ISR4331", "Site-to-Site VPN", "WAN/LAN 邊界隔離"], img: "lab/Cisco Packet Tracer練習圖片/Taipei_KHH_VPN_OK.png", pkt: "lab/Cisco Packet Tracer練習儲存品/Taipei_KHH_VPN_OK.pkt" },
+    { title: "2. 多部門 VLAN 切分與 DHCP 自動配發系統", desc: "解決企業內部廣播風暴與部門資安隔離需求，配置路由器單臂路由（Router-on-a-Stick）、Trunk 埠及各部門 DHCP 網段自動發放。", tags: ["VLAN 網段隔離", "802.1Q Trunk", "DHCP Server"], img: "lab/Cisco Packet Tracer練習圖片/Cisco_Router_DHCP_VLAN_Lab.png", pkt: "lab/Cisco Packet Tracer練習儲存品/Cisco_Router_DHCP_VLAN_Lab.pkt" },
+    { title: "3. 企業內網防迴圈（STP Rapid / PortFast）", desc: "針對機房交換器雙線備援架構，啟用快速生成樹協定（RSTP）防止網路迴圈癱瘓，並於終端埠配置 PortFast 加速員工電腦連網。", tags: ["STP / RSTP 防迴圈", "PortFast 優化", "Switch 冗餘備援"], img: "lab/Cisco Packet Tracer練習圖片/STP_Rapid_PortFast.png", pkt: "lab/Cisco Packet Tracer練習儲存品/STP_Rapid_PortFast.pkt" },
+    { title: "4. 企業關鍵業務 QoS 頻寬流量控制優化", desc: "確保 ERP 系統、視訊會議與語音通話等關鍵流量優先傳輸，限制非業務下載佔用出口頻寬，提升整體辦公室網路穩定度。", tags: ["QoS 流量整形", "頻寬優先權控管", "網路效能優化"], img: "lab/Cisco Packet Tracer練習圖片/QoS流量控制優化實作.png", pkt: "lab/Cisco Packet Tracer練習儲存品/QoS流量控制優化實作.pkt" },
+    { title: "5. 跨區廣域骨幹與 OSPF 動態路由收斂", desc: "整合乙太網路與 Serial 廣域專線（HWIC 模組擴充與 DCE 時脈同步），部署 OSPF 動態路由協定，實現多站點自動路徑計算與故障切換。", tags: ["OSPF Process 1 (FULL)", "WAN Serial / DCE", "Cisco 2911"], img: "lab/Cisco Packet Tracer練習圖片/亞灣到太平洋衛星網路_通車版.png", pkt: "lab/Cisco Packet Tracer練習儲存品/亞灣到太平洋衛星網路_通車版.pkt" },
+    { title: "6. Linux 核心伺服器建置與 OSPF 鄰居驗證", desc: "於 Rocky Linux 9 部署 BIND (DNS)、Apache 與 MariaDB 資料庫；熟練運用 Wireshark 抓包排障與 Cisco OSPF 雙向路由收斂測試。", tags: ["Rocky Linux 9 / SSH", "DNS / Web / DB", "Wireshark 抓包"], img: "lab/Cisco Packet Tracer練習圖片/練習 OSPF檔案.png", pkt: "lab/Cisco Packet Tracer練習儲存品/練習 OSPF檔案.pkt" }
+  ];
+  function openModal(idx) {
+    const item = labs[idx];
+    document.getElementById("lbTitle").textContent = item.title;
+    document.getElementById("lbImg").src = encodeURI(item.img);
+    document.getElementById("lbPkt").href = encodeURI(item.pkt);
+    document.getElementById("lightbox").classList.add("open");
+  }
+  function closeModal() { document.getElementById("lightbox").classList.remove("open"); }
+  document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("projectGrid").innerHTML = labs.map((item, i) => `
+      <div class="card reveal">
+        <div class="thumb-wrap" onclick="openModal(${i})">
+          <img src="${encodeURI(item.img)}" alt="${item.title}">
+          <span class="zoom-hint">🔍 點擊放大</span>
+        </div>
+        <div class="card-body">
+          <div>
+            <h3>${item.title}</h3>
+            <p>${item.desc}</p>
+            <div class="tags">${item.tags.map(t => `<span class="tag">${t}</span>`).join("")}</div>
+          </div>
+          <div class="actions">
+            <button class="btn-act btn-img" onclick="openModal(${i})">🖼️ 預覽拓撲圖</button>
+            <a href="${encodeURI(item.pkt)}" download class="btn-act btn-pkt">📥 下載 .pkt 檔</a>
+          </div>
+        </div>
+      </div>
+    `).join("");
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e, idx) => {
+        if (e.isIntersecting) { setTimeout(() => e.target.classList.add("show"), (idx % 3) * 120); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+  });
+</script>
+</body>
+</html>
